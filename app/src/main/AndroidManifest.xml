@@ -53,9 +53,13 @@
             </intent-filter>
 
         </activity>
-        //登录
+
         <activity
             android:name=".ui.ActMain"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.ActClipImage"
             android:screenOrientation="portrait">
         </activity>
     </application>

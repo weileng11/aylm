@@ -146,4 +146,9 @@
     <color name="black">#000000</color><!--黑色 -->
     <color name="grassgreen">#99cc33</color><!--草绿色 -->
     <color name="gray_cc">#cccccc</color><!--灰色cc -->
+
+    <!--浅橙色-->
+    <color name="zjzc_orange_light">#ff8704</color>
+    <!--默认EditText提示字体颜色-->
+    <color name="zjzc_hint_text_color">#A8A8A8</color>
 </resources>

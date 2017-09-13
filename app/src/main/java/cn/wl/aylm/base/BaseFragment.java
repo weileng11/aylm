@@ -1,68 +1,34 @@
 package cn.wl.aylm.base;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import cn.wl.aylm.AylmApplication;
 import cn.wl.aylm.utils.T;
 
 /**
- * Author:Bruce
- * time:2017/8/29.
+ * Author:lt
+ * time:2017/7/19.
  * contact：weileng143@163.com
  *
  * @description
  */
 
-public abstract class BaseActivity extends AppCompatActivity{
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
-        setContentView(getLayoutId());
-        ButterKnife.inject(this);
-        listenter();
-        initData();
-        ((AylmApplication)getApplication()).activityList.add(this);
-    }
+public abstract class BaseFragment extends Fragment {
 
-    /**
-     * 初始化界面布局
-     */
+    //    protected BaseActivity mActivity;
+    //获取布局文件ID
     protected abstract int getLayoutId();
-    /**
-     * 监听
-     */
-    protected abstract void listenter();
 
-    /**
-     * 初始化界面数据
-     */
-    protected abstract void initData();
+    protected abstract void initView(View view, Bundle savedInstanceState);
 
-    @Override
-    protected void onDestroy() {
-        ((AylmApplication)getApplication()).activityList.remove(this);
-        super.onDestroy();
-    }
-
-    /**
-     * 返回键
-     */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            finish();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     /**
      * 跳转后，当前界面自销毁
@@ -114,6 +80,26 @@ public abstract class BaseActivity extends AppCompatActivity{
         aty.startActivity(intent);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.inject(this, view);
+        initView(view, savedInstanceState);
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //销毁定位
+//        LoveToothApplication.getInstance().destroyLocation();
+        ButterKnife.reset(this);
+    }
+
+    public void showMsg(String msg) {
+        T.showShort(getActivity(), msg);
+    }
+
     ProgressDialog dialog;
 
     public void showLoading() {
@@ -124,7 +110,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         // loadingMsg.setText(message);
         // loadingView.setVisibility(View.VISIBLE);
         if (dialog == null) {
-            dialog = new ProgressDialog(this);
+            dialog = new ProgressDialog(getActivity());
             dialog.setCancelable(false);
         }
         dialog.setMessage(message);
@@ -136,10 +122,7 @@ public abstract class BaseActivity extends AppCompatActivity{
         dialog.dismiss();
     }
 
-    public Context getContext() {
-        return getApplicationContext();
-    }
-    public void showMsg(String msg) {
-        T.showShort(this, msg);
+    public void finish() {
+
     }
 }
