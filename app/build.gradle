@@ -41,6 +41,9 @@ dependencies {
     compile 'in.srain.cube:ptr-load-more:1.0.3'
     compile 'in.srain.cube:clog:1.0.2'
     compile 'in.srain.cube:cube-sdk:1.0.44@aar'
+    //引导界面轮播  详细使用：https://github.com/bingoogolapple/BGABanner-Android#%E6%89%93%E8%B5%8F%E6%94%AF%E6%8C%81 (引导只支持本地图片)
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'cn.bingoogolapple:bga-banner:2.1.7@aar'
 
     compile project(':okhttp_http')
     compile project(':utils')
