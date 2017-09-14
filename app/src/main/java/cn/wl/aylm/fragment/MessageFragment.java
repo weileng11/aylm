@@ -37,6 +37,7 @@ public class MessageFragment extends BaseFragment {
             R.mipmap.message_discounts, R.mipmap.message_notifaction, R.mipmap.message_law};
     private ArrayList<PublicInfo> pList = new ArrayList<>();
     MessageAdapter messageAdapter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fraggment_message;
@@ -46,7 +47,7 @@ public class MessageFragment extends BaseFragment {
     protected void initView(View view, Bundle savedInstanceState) {
         topbar.setTxvTitleName("消息");
         topbar.setTxvLeftShow();
-        messageAdapter=new MessageAdapter(getActivity());
+        messageAdapter = new MessageAdapter(getActivity());
         messageLv.setAdapter(messageAdapter);
         setListViewValue();
     }
@@ -63,7 +64,7 @@ public class MessageFragment extends BaseFragment {
         }
         Log.i("INFO", "总数据" + pList.size());
         //设置界面参数值
-       messageAdapter.setData(pList);
+        messageAdapter.setData(pList);
         messageLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

@@ -34,6 +34,7 @@ public class RecordFragment extends BaseFragment {
     TabLayout tabLayout;
     private List<String> titles;
     private List<String> states;
+    private List<String> paramUrl;
     private List<Fragment> fragments;
     private PagerAdapter adapter;
 
@@ -52,23 +53,33 @@ public class RecordFragment extends BaseFragment {
 
     private void initBase() {
         titles = new ArrayList<>();
-        titles.add("待付款");
-        titles.add("待接单");
-        titles.add("进行中");
-        titles.add("已完成");
+        states = new ArrayList<>();
+        paramUrl=new ArrayList<>();
         titles.add("全部");
+        titles.add("待付款");
+        titles.add("待使用");
+        titles.add("待评价");
+        states.add("1");
+        states.add("2");
+        states.add("3");
+        states.add("4");
+
+        paramUrl.add(null);
+        paramUrl.add("&PaymentStatus=0");
+        paramUrl.add("&oderstatus=1");
+        paramUrl.add("&oderstatus=5");
     }
 
     private void initViewPager() {
         fragments = new ArrayList<>();
-        int size = titles.size();
+        int size = states.size();
         for (int i = 0; i < size; i++) {
             RecordItemFragment  fragment = new RecordItemFragment();
-//            Bundle bundle = new Bundle();
+            Bundle bundle = new Bundle();
 //            bundle.putString("state", states.get(i));
-//            bundle.putString("type", mType);
-//            bundle.putString("order_type", null);
-//            fragment.setArguments(bundle);
+            bundle.putString("type",states.get(i));
+            bundle.putString("paramurl", paramUrl.get(i));
+            fragment.setArguments(bundle);
             fragments.add(fragment);
         }
 

@@ -37,6 +37,13 @@ dependencies {
     compile 'com.zhy:autolayout:1.4.3'
     //logcat
     compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    //上啦下拉刷新
+    compile 'in.srain.cube:ptr-load-more:1.0.3'
+    compile 'in.srain.cube:clog:1.0.2'
+    compile 'in.srain.cube:cube-sdk:1.0.44@aar'
+
     compile project(':okhttp_http')
     compile project(':utils')
+
+
 }
